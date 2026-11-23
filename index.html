@@ -1,0 +1,1040 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>什么时候回家过年 · 趣味小测</title>
+<meta name="description" content="14 道小题，算出属于你的归家档期。纯娱乐自评，不收集任何信息。">
+<!--
+  本主题风格推导：以「春运票根 + 年画红」为母题 —— 一张被反复摩挲的火车票、
+  盖了朱红印章的归乡证明和手账贴纸拼成一页；色相取春联朱红与福字金、底色取旧信纸奶油，
+  字体走圆润手写，形状语言是票根虚线撕口、圆角印章与行李箱贴纸，
+  与「暖粉小动物的恋爱主题」「冷色网格的职场主题」在色相、字体气质、插画母题上彻底区分。
+  桌面与移动共用下方唯一一套 :root 令牌，断点只改布局列数与容器宽度。
+-->
+<style>
+:root{
+  /* ===== 颜色 --color-* ===== */
+  --color-primary:#C8412F;
+  --color-primary-deep:#9E2F21;
+  --color-primary-soft:#F6D9CE;
+  --color-secondary:#2F6B58;
+  --color-secondary-soft:#DCEBE2;
+  --color-accent:#D99A2B;
+  --color-accent-soft:#F7E7C6;
+  --color-bg:#FBF5E9;
+  --color-surface:#FFFDF7;
+  --color-surface-alt:#F5EAD8;
+  --color-ink:#3A2A20;
+  --color-ink-sub:#6E5849;
+  --color-ink-faint:#8E7767;
+  --color-line:#E2CDB2;
+  --color-line-strong:#B98C63;
+  --color-success:#2F6B58;
+  --color-warning:#A85C17;
+  --color-danger:#B3372B;
+  --color-focus:#1F5FA8;
+  --color-on-primary:#FFFDF7;
+  --color-shadow:rgba(90,55,32,.13);
+  --color-shadow-strong:rgba(90,55,32,.20);
+
+  /* ===== 字体 --font-* ===== */
+  --font-sans:"幼圆","YouYuan","PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑","Segoe UI",system-ui,sans-serif;
+  --font-hand:"华文琥珀","STHupo","幼圆","YouYuan","PingFang SC","Microsoft YaHei","Segoe UI",cursive,sans-serif;
+  --font-size-xs:12px;
+  --font-size-sm:14px;
+  --font-size-base:16px;
+  --font-size-lg:18px;
+  --font-size-xl:22px;
+  --font-size-2xl:28px;
+  --font-size-3xl:36px;
+  --font-size-display:46px;
+  --font-weight-regular:400;
+  --font-weight-medium:500;
+  --font-weight-bold:700;
+  --font-weight-heavy:800;
+  --line-height-tight:1.25;
+  --line-height-base:1.75;
+  --line-height-loose:1.95;
+  --letter-spacing-tight:-.02em;
+  --letter-spacing-base:.01em;
+  --letter-spacing-wide:.08em;
+  --text-stroke-width:1px;
+
+  /* ===== 间距 --space-* ===== */
+  --space-1:4px;
+  --space-2:8px;
+  --space-3:12px;
+  --space-4:16px;
+  --space-6:24px;
+  --space-8:32px;
+  --space-12:48px;
+  --space-16:64px;
+  --grid-gap:var(--space-6);
+  --container-sm:480px;
+  --container-md:768px;
+  --container-lg:1080px;
+  --tap-min:44px;
+
+  /* ===== 形状 --radius-* / --shadow-* / 手绘描边 ===== */
+  --radius-xs:6px;
+  --radius-sm:10px;
+  --radius-md:16px;
+  --radius-lg:24px;
+  --radius-xl:32px;
+  --radius-pill:999px;
+  --radius-doodle:60% 40% 55% 45% / 45% 55% 40% 60%;
+  --shadow-sm:0 2px 0 var(--color-line),0 4px 12px var(--color-shadow);
+  --shadow-md:0 3px 0 var(--color-line),0 10px 24px var(--color-shadow);
+  --shadow-lg:0 6px 0 var(--color-line-strong),0 20px 40px var(--color-shadow-strong);
+  --shadow-inset:inset 0 2px 6px var(--color-shadow);
+  --stroke-hand:2px;
+  --stroke-hand-thin:1.5px;
+  --stroke-hand-bold:3px;
+  --stroke-ticket:2px dashed var(--color-line-strong);
+  --focus-ring-width:3px;
+  --focus-ring-offset:3px;
+
+  /* ===== 动效 --motion-* ===== */
+  --motion-fast:150ms;
+  --motion-base:300ms;
+  --motion-slow:500ms;
+  --motion-ease:cubic-bezier(.34,1.56,.64,1);
+  --motion-ease-out:cubic-bezier(.22,.61,.36,1);
+
+  /* ===== 插画 --illustration-* ===== */
+  --illustration-motif:"票根·灯笼·行李箱·福字印章";
+  --illustration-stroke:2.5;
+  --illustration-stroke-color:var(--color-primary-deep);
+  --illustration-doodle-size:28px;
+  --illustration-sticker-size:56px;
+  --illustration-badge-size:104px;
+  --illustration-hero-size:280px;
+  --illustration-tilt:-2deg;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  min-height:100vh;
+  background-color:var(--color-bg);
+  background-image:
+    radial-gradient(circle at 12% 18%,var(--color-primary-soft) 0,transparent 26%),
+    radial-gradient(circle at 88% 8%,var(--color-accent-soft) 0,transparent 24%),
+    repeating-linear-gradient(0deg,transparent 0 3px,rgba(185,140,99,.045) 3px 4px);
+  color:var(--color-ink);
+  font-family:var(--font-sans);
+  font-size:var(--font-size-base);
+  font-weight:var(--font-weight-regular);
+  line-height:var(--line-height-base);
+  letter-spacing:var(--letter-spacing-base);
+}
+[hidden]{display:none !important}
+button{font:inherit;color:inherit;cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.55}
+:focus-visible{outline:var(--focus-ring-width) solid var(--color-focus);outline-offset:var(--focus-ring-offset)}
+svg{display:block;max-width:100%}
+a{color:var(--color-primary-deep)}
+
+/* ---------- 布局骨架 ---------- */
+.container{width:100%;max-width:var(--container-md);margin-inline:auto;padding-inline:var(--space-6)}
+.site-head{padding-block:var(--space-6) var(--space-2)}
+.brand{display:flex;align-items:center;gap:var(--space-3)}
+.brand-mark{width:var(--space-12);height:var(--space-12);flex:0 0 auto}
+.brand-text{display:flex;flex-direction:column;line-height:var(--line-height-tight)}
+.brand-name{font-family:var(--font-hand);font-size:var(--font-size-lg);font-weight:var(--font-weight-bold);letter-spacing:var(--letter-spacing-wide);color:var(--color-primary-deep)}
+.brand-sub{font-size:var(--font-size-xs);color:var(--color-ink-faint);letter-spacing:var(--letter-spacing-wide)}
+.site-foot{padding:var(--space-8) var(--space-6) var(--space-12);text-align:center;font-size:var(--font-size-xs);color:var(--color-ink-faint);line-height:var(--line-height-base)}
+main{padding-bottom:var(--space-8)}
+
+/* ---------- 手账式卡片 / 贴纸 ---------- */
+.card{
+  position:relative;
+  background:var(--color-surface);
+  border:var(--stroke-hand) solid var(--color-line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-md);
+  padding:var(--space-8);
+}
+.card--ticket::before,.card--ticket::after{
+  content:"";position:absolute;top:var(--space-12);width:var(--space-4);height:var(--space-4);
+  border-radius:var(--radius-pill);background:var(--color-bg);border:var(--stroke-hand) solid var(--color-line);
+}
+.card--ticket::before{left:calc(0px - var(--space-2))}
+.card--ticket::after{right:calc(0px - var(--space-2))}
+.card--ticket{border-style:dashed}
+.sticker{
+  display:inline-flex;align-items:center;gap:var(--space-2);
+  background:var(--color-accent-soft);
+  border:var(--stroke-hand-thin) solid var(--color-accent);
+  border-radius:var(--radius-pill);
+  padding:var(--space-1) var(--space-4);
+  font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);
+  color:var(--color-primary-deep);
+  box-shadow:var(--shadow-sm);
+}
+.sticker--tilt{transform:rotate(var(--illustration-tilt))}
+.sticker--green{background:var(--color-secondary-soft);border-color:var(--color-secondary);color:var(--color-secondary)}
+.sticker--red{background:var(--color-primary-soft);border-color:var(--color-primary);color:var(--color-primary-deep)}
+.eyebrow{
+  font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);
+  letter-spacing:var(--letter-spacing-wide);color:var(--color-secondary);
+  display:flex;align-items:center;gap:var(--space-2);
+}
+.eyebrow::before{content:"";width:var(--space-6);height:var(--stroke-hand);background:var(--color-secondary);border-radius:var(--radius-pill)}
+.display-title{
+  margin:var(--space-4) 0 var(--space-3);
+  font-family:var(--font-hand);
+  font-size:var(--font-size-display);
+  font-weight:var(--font-weight-heavy);
+  line-height:var(--line-height-tight);
+  letter-spacing:var(--letter-spacing-tight);
+  color:var(--color-primary);
+  text-shadow:
+    var(--text-stroke-width) var(--text-stroke-width) 0 var(--color-primary-deep),
+    calc(0px - var(--text-stroke-width)) var(--text-stroke-width) 0 var(--color-primary-deep),
+    var(--text-stroke-width) calc(0px - var(--text-stroke-width)) 0 var(--color-primary-deep),
+    calc(0px - var(--text-stroke-width)) calc(0px - var(--text-stroke-width)) 0 var(--color-primary-deep),
+    0 var(--space-2) 0 var(--color-accent-soft);
+}
+.section-title{
+  margin:0 0 var(--space-4);
+  font-family:var(--font-hand);font-size:var(--font-size-xl);font-weight:var(--font-weight-bold);
+  color:var(--color-primary-deep);letter-spacing:var(--letter-spacing-wide);
+}
+.lead{font-size:var(--font-size-lg);color:var(--color-ink-sub);line-height:var(--line-height-loose);margin:0}
+.muted{font-size:var(--font-size-sm);color:var(--color-ink-faint)}
+.disclaimer{
+  display:flex;align-items:flex-start;gap:var(--space-2);
+  font-size:var(--font-size-sm);color:var(--color-ink-sub);
+  background:var(--color-surface-alt);border:var(--stroke-hand-thin) dashed var(--color-line-strong);
+  border-radius:var(--radius-sm);padding:var(--space-3) var(--space-4);
+}
+
+/* ---------- 按钮 ---------- */
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);
+  min-height:var(--tap-min);padding:var(--space-3) var(--space-8);
+  border:var(--stroke-hand) solid var(--color-primary-deep);
+  border-radius:var(--radius-pill);
+  background:var(--color-surface);color:var(--color-primary-deep);
+  font-size:var(--font-size-lg);font-weight:var(--font-weight-bold);
+  letter-spacing:var(--letter-spacing-wide);
+  box-shadow:var(--shadow-sm);
+  transition:transform var(--motion-fast) var(--motion-ease),box-shadow var(--motion-base) var(--motion-ease-out),background-color var(--motion-base) var(--motion-ease-out);
+}
+.btn:hover:not(:disabled){transform:translateY(calc(0px - var(--space-1)));box-shadow:var(--shadow-md);background:var(--color-primary-soft)}
+.btn:active:not(:disabled){transform:translateY(var(--space-1)) scale(.97);box-shadow:var(--shadow-inset)}
+.btn--primary{background:var(--color-primary);color:var(--color-on-primary);border-color:var(--color-primary-deep);box-shadow:var(--shadow-md)}
+.btn--primary:hover:not(:disabled){background:var(--color-primary-deep);color:var(--color-on-primary)}
+.btn--ghost{background:transparent;border-style:dashed;box-shadow:none}
+.btn--ghost:hover:not(:disabled){background:var(--color-surface-alt);box-shadow:var(--shadow-sm)}
+.btn--small{min-height:var(--tap-min);padding:var(--space-2) var(--space-4);font-size:var(--font-size-sm)}
+.btn-deco{width:var(--illustration-doodle-size);height:var(--illustration-doodle-size);flex:0 0 auto}
+
+/* ---------- 首页 ---------- */
+.intro-grid{display:grid;grid-template-columns:1fr;gap:var(--grid-gap);align-items:center}
+.intro-hero{padding-top:var(--space-4)}
+.intro-meta{display:flex;flex-wrap:wrap;gap:var(--space-3);margin:var(--space-6) 0}
+.meta-chip{
+  display:flex;align-items:center;gap:var(--space-2);
+  background:var(--color-surface);border:var(--stroke-hand) solid var(--color-line);
+  border-radius:var(--radius-sm);padding:var(--space-2) var(--space-4);
+  font-size:var(--font-size-sm);font-weight:var(--font-weight-medium);color:var(--color-ink-sub);
+  box-shadow:var(--shadow-sm);
+}
+.meta-chip:nth-child(2){transform:rotate(var(--illustration-tilt))}
+.meta-chip strong{font-family:var(--font-hand);font-size:var(--font-size-lg);color:var(--color-primary-deep)}
+.intro-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-4);margin-top:var(--space-8)}
+.intro-visual{display:flex;justify-content:center;align-items:center;padding:var(--space-4)}
+.hero-svg{width:100%;max-width:var(--illustration-hero-size);height:auto;filter:drop-shadow(0 var(--space-2) 0 var(--color-shadow))}
+.rule-box{margin-top:var(--space-8);border-top:var(--stroke-ticket);padding-top:var(--space-6)}
+.rule-box summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:var(--space-2);
+  font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);color:var(--color-secondary);
+  min-height:var(--tap-min);
+}
+.rule-box summary::-webkit-details-marker{display:none}
+.rule-box summary::before{content:"✦";color:var(--color-accent)}
+.rule-box[open] summary::before{content:"✧"}
+.rule-body{font-size:var(--font-size-sm);color:var(--color-ink-sub);line-height:var(--line-height-loose)}
+.rule-body ol{padding-left:var(--space-6);margin:var(--space-2) 0}
+.rule-body li{margin-bottom:var(--space-1)}
+.rule-body code{font-family:var(--font-sans);background:var(--color-surface-alt);padding:0 var(--space-1);border-radius:var(--radius-xs);color:var(--color-primary-deep)}
+
+/* ---------- 答题页 ---------- */
+.quiz-top{display:flex;flex-direction:column;gap:var(--space-3);margin-bottom:var(--space-6)}
+.progress-head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-3);font-size:var(--font-size-sm);color:var(--color-ink-sub)}
+.progress-head strong{font-family:var(--font-hand);font-size:var(--font-size-xl);color:var(--color-primary-deep)}
+.progress{position:relative;height:var(--space-4);background:var(--color-surface-alt);border:var(--stroke-hand) solid var(--color-line);border-radius:var(--radius-pill);box-shadow:var(--shadow-inset)}
+.progress-rail{position:absolute;inset:0 var(--space-2);border-top:var(--stroke-ticket);top:50%;height:0}
+.progress-fill{position:absolute;left:0;top:0;bottom:0;width:var(--p,0%);background:var(--color-primary-soft);border-radius:var(--radius-pill);transition:width var(--motion-base) var(--motion-ease-out)}
+.progress-icon{position:absolute;top:50%;left:var(--p,0%);transform:translate(-50%,-50%);width:var(--space-8);height:var(--space-8);transition:left var(--motion-base) var(--motion-ease);z-index:1}
+.q-nav{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-2)}
+.q-nav-btn{
+  width:var(--tap-min);height:var(--tap-min);border:var(--stroke-hand-thin) solid var(--color-line);
+  border-radius:var(--radius-sm);background:var(--color-surface);color:var(--color-ink-faint);
+  font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);
+  transition:transform var(--motion-fast) var(--motion-ease),background-color var(--motion-fast) var(--motion-ease-out);
+}
+.q-nav-btn:hover{transform:translateY(calc(0px - var(--space-1)));background:var(--color-accent-soft)}
+.q-nav-btn.is-answered{background:var(--color-secondary-soft);border-color:var(--color-secondary);color:var(--color-secondary)}
+.q-nav-btn.is-current{background:var(--color-primary);border-color:var(--color-primary-deep);color:var(--color-on-primary);transform:rotate(var(--illustration-tilt)) scale(1.06)}
+.q-card{min-height:320px}
+.q-index{display:inline-block;font-family:var(--font-hand);font-size:var(--font-size-sm);letter-spacing:var(--letter-spacing-wide);color:var(--color-accent);margin-bottom:var(--space-3)}
+.q-text{margin:0 0 var(--space-8);font-family:var(--font-hand);font-size:var(--font-size-2xl);font-weight:var(--font-weight-bold);line-height:var(--line-height-tight);color:var(--color-ink)}
+.options{display:grid;grid-template-columns:1fr;gap:var(--space-3)}
+.option{
+  position:relative;display:flex;align-items:flex-start;gap:var(--space-4);width:100%;text-align:left;
+  min-height:var(--tap-min);padding:var(--space-4) var(--space-6);
+  background:var(--color-surface);
+  border:var(--stroke-hand) solid var(--color-line);
+  border-radius:var(--radius-md);
+  font-size:var(--font-size-base);line-height:var(--line-height-base);color:var(--color-ink);
+  box-shadow:var(--shadow-sm);
+  transition:transform var(--motion-fast) var(--motion-ease),border-color var(--motion-base) var(--motion-ease-out),background-color var(--motion-base) var(--motion-ease-out),box-shadow var(--motion-base) var(--motion-ease-out);
+}
+.option:hover:not(:disabled){transform:translateY(calc(0px - var(--space-1))) rotate(-.4deg);border-color:var(--color-accent);background:var(--color-accent-soft);box-shadow:var(--shadow-md)}
+.option:active:not(:disabled){transform:translateY(var(--space-1)) scale(.99)}
+.option[aria-pressed="true"]{border-color:var(--color-primary);background:var(--color-primary-soft);box-shadow:var(--shadow-md);font-weight:var(--font-weight-bold)}
+.option[aria-pressed="true"]::after{
+  content:"";position:absolute;inset:var(--space-1);
+  border:var(--stroke-hand) solid var(--color-primary);border-radius:var(--radius-doodle);
+  transform:rotate(-1deg);pointer-events:none;
+  animation:doodle-in var(--motion-slow) var(--motion-ease) both;
+}
+.option[aria-pressed="true"] .option-dot{background:var(--color-primary);border-color:var(--color-primary-deep)}
+.option[aria-pressed="true"] .option-dot::after{content:"";position:absolute;inset:var(--space-1);border-radius:var(--radius-pill);background:var(--color-on-primary)}
+.option-dot{position:relative;flex:0 0 auto;width:var(--space-6);height:var(--space-6);margin-top:var(--space-1);border:var(--stroke-hand) solid var(--color-line-strong);border-radius:var(--radius-pill);background:var(--color-surface-alt);transition:background-color var(--motion-fast) var(--motion-ease-out)}
+.option-key{flex:0 0 auto;font-family:var(--font-hand);font-weight:var(--font-weight-bold);color:var(--color-accent)}
+.option-label{flex:1}
+.quiz-actions{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:var(--space-3);margin-top:var(--space-8)}
+.hint{display:flex;align-items:center;gap:var(--space-2);font-size:var(--font-size-sm);color:var(--color-ink-faint);min-height:var(--tap-min)}
+.hint--warn{color:var(--color-danger);font-weight:var(--font-weight-bold);animation:shake var(--motion-base) var(--motion-ease-out)}
+.hint svg{width:var(--illustration-doodle-size);height:var(--illustration-doodle-size);flex:0 0 auto}
+
+/* ---------- 结果页 ---------- */
+.result-hero{text-align:center;position:relative;overflow:hidden}
+.result-hero .sticker{margin-bottom:var(--space-4)}
+.badge{width:var(--illustration-badge-size);height:var(--illustration-badge-size);margin:0 auto var(--space-4);animation:pop-in var(--motion-slow) var(--motion-ease) both}
+.result-title{margin:0 0 var(--space-2);font-family:var(--font-hand);font-size:var(--font-size-3xl);font-weight:var(--font-weight-heavy);color:var(--color-primary-deep);line-height:var(--line-height-tight)}
+.result-date{margin:0 0 var(--space-4);font-size:var(--font-size-lg);font-weight:var(--font-weight-bold);color:var(--color-secondary)}
+.score-pill{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-accent-soft);border:var(--stroke-hand) solid var(--color-accent);border-radius:var(--radius-pill);padding:var(--space-1) var(--space-6);font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);color:var(--color-primary-deep)}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti span{position:absolute;width:var(--space-3);height:var(--space-3);opacity:0;animation:confetti-fall var(--motion-slow) var(--motion-ease-out) forwards}
+.result-block{margin-top:var(--space-8)}
+.dim-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4)}
+.dim-row{display:grid;grid-template-columns:1fr;gap:var(--space-1)}
+.dim-head{display:flex;justify-content:space-between;align-items:baseline;font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);color:var(--color-ink-sub)}
+.dim-value{font-family:var(--font-hand);font-size:var(--font-size-lg);color:var(--color-primary-deep)}
+.dim-track{height:var(--space-3);background:var(--color-surface-alt);border:var(--stroke-hand-thin) solid var(--color-line);border-radius:var(--radius-pill);overflow:hidden}
+.dim-fill{height:100%;border-radius:var(--radius-pill);background:var(--color-secondary);transition:width var(--motion-slow) var(--motion-ease-out)}
+.dim-row:nth-child(2) .dim-fill{background:var(--color-accent)}
+.dim-row:nth-child(3) .dim-fill{background:var(--color-primary)}
+.dim-row:nth-child(4) .dim-fill{background:var(--color-line-strong)}
+.dim-row.is-dominant .dim-head{color:var(--color-primary-deep)}
+.dim-row.is-dominant .dim-value::after{content:" ★";color:var(--color-accent)}
+.explain{font-size:var(--font-size-base);line-height:var(--line-height-loose);color:var(--color-ink-sub);margin:0}
+.explain strong{color:var(--color-primary-deep)}
+.advice-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3);counter-reset:advice}
+.advice-item{
+  position:relative;counter-increment:advice;
+  display:flex;gap:var(--space-4);align-items:flex-start;
+  background:var(--color-surface-alt);border:var(--stroke-hand-thin) dashed var(--color-line-strong);
+  border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);
+  font-size:var(--font-size-sm);line-height:var(--line-height-loose);color:var(--color-ink);
+}
+.advice-item::before{
+  content:counter(advice);flex:0 0 auto;
+  width:var(--space-8);height:var(--space-8);display:grid;place-items:center;
+  background:var(--color-primary);color:var(--color-on-primary);
+  border-radius:var(--radius-pill);font-family:var(--font-hand);font-weight:var(--font-weight-bold);
+}
+.derive{margin-top:var(--space-8);border:var(--stroke-hand) dashed var(--color-line-strong);border-radius:var(--radius-md);padding:var(--space-4) var(--space-6);background:var(--color-surface-alt)}
+.derive summary{cursor:pointer;list-style:none;min-height:var(--tap-min);display:flex;align-items:center;gap:var(--space-2);font-size:var(--font-size-sm);font-weight:var(--font-weight-bold);color:var(--color-secondary)}
+.derive summary::-webkit-details-marker{display:none}
+.derive summary::before{content:"✎";color:var(--color-accent)}
+.derive-body{font-size:var(--font-size-sm);line-height:var(--line-height-loose);color:var(--color-ink-sub)}
+.derive-table{width:100%;border-collapse:collapse;margin-top:var(--space-3);font-size:var(--font-size-xs)}
+.derive-table th,.derive-table td{border:var(--stroke-hand-thin) solid var(--color-line);padding:var(--space-1) var(--space-2);text-align:left}
+.derive-table th{background:var(--color-accent-soft);color:var(--color-primary-deep);font-weight:var(--font-weight-bold)}
+.derive-table tr.is-hit td{background:var(--color-primary-soft);color:var(--color-primary-deep);font-weight:var(--font-weight-bold)}
+.result-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:var(--space-3);margin-top:var(--space-8)}
+
+/* ---------- 动效关键帧 ---------- */
+@keyframes doodle-in{0%{opacity:0;transform:rotate(-8deg) scale(.9)}100%{opacity:1;transform:rotate(-1deg) scale(1)}}
+@keyframes pop-in{0%{opacity:0;transform:scale(.6) rotate(-12deg)}60%{opacity:1;transform:scale(1.08) rotate(4deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(calc(0px - var(--space-1)))}75%{transform:translateX(var(--space-1))}}
+@keyframes confetti-fall{0%{opacity:0;transform:translateY(calc(0px - var(--space-4))) rotate(0)}20%{opacity:1}100%{opacity:0;transform:translateY(var(--space-16)) rotate(180deg)}}
+@keyframes float-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(0px - var(--space-2)))}}
+.hero-svg{animation:float-soft 4s var(--motion-ease-out) infinite}
+
+/* ---------- 断点：只改布局列数与容器宽度，token 取值不变 ---------- */
+@media (max-width:480px){
+  .container{padding-inline:var(--space-4)}
+  .card{padding:var(--space-6)}
+  .display-title{font-size:var(--font-size-3xl)}
+  .q-text{font-size:var(--font-size-xl)}
+  .result-title{font-size:var(--font-size-2xl)}
+  .option{padding:var(--space-3) var(--space-4)}
+  .intro-actions .btn{width:100%}
+  .site-head{padding-block:var(--space-4) var(--space-1)}
+}
+@media (min-width:769px) and (max-width:1199px){
+  .container{max-width:var(--container-md)}
+}
+@media (min-width:1200px){
+  .container{max-width:var(--container-lg)}
+  .intro-grid{grid-template-columns:1.1fr .9fr;gap:var(--space-12)}
+  .display-title{font-size:var(--font-size-display)}
+  .dim-grid{grid-template-columns:1fr 1fr;gap:var(--space-4) var(--space-8)}
+  .options{grid-template-columns:1fr 1fr}
+  .q-card{min-height:340px}
+}
+
+/* ---------- 降级：尊重减少动效偏好 ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+  .confetti{display:none}
+  .option[aria-pressed="true"]::after{opacity:1;transform:rotate(-1deg)}
+}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="container">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" role="img" aria-label="一枚手绘福字印章">
+        <title>手绘福字印章</title>
+        <rect x="5" y="5" width="38" height="38" rx="9" fill="#C8412F" stroke="#9E2F21" stroke-width="2.5"/>
+        <path d="M14 15c3-2 17-2 20 0M24 12v24M15 25h18M17 34h14" fill="none" stroke="#FFFDF7" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="39" cy="9" r="3" fill="#D99A2B"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">归期小票站</span>
+        <span class="brand-sub">一张关于回家的手账</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container" id="app">
+
+  <!-- ===== 首页 ===== -->
+  <section class="view" id="view-intro" aria-labelledby="intro-title">
+    <div class="intro-grid">
+      <div class="intro-hero">
+        <div class="eyebrow">2026 · 春运手账特辑</div>
+        <h1 class="display-title" id="intro-title">什么时候<br>回家过年？</h1>
+        <p class="lead">有人小年就守在灶台边，有人除夕傍晚才拎着箱子冲进门。<br>14 道小题，算出属于你的那一班归家档期。</p>
+        <div class="intro-meta" aria-label="测试信息">
+          <span class="meta-chip">共 <strong>14</strong> 题</span>
+          <span class="meta-chip">约 <strong>3</strong> 分钟</span>
+          <span class="meta-chip"><strong>6</strong> 种归家档期</span>
+        </div>
+        <div class="intro-actions">
+          <button class="btn btn--primary" id="btn-start" type="button">
+            开始测一测
+            <svg class="btn-deco" viewBox="0 0 28 28" role="img" aria-label="一支手绘小箭头">
+              <title>手绘小箭头</title>
+              <path d="M4 14c6-1 12-1 18 0M16 8c3 2 5 4 6 6-1 2-3 4-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M22 4l1.5 3M25 9l-3 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <span class="muted">不用登录 · 不用留任何信息</span>
+        </div>
+      </div>
+
+      <div class="intro-visual">
+        <svg class="hero-svg" viewBox="0 0 280 280" role="img" aria-label="一张手绘火车票，旁边挂着小灯笼，靠着行李箱，盖着福字印章，还有几笔烟花">
+          <title>春运票根主视觉</title>
+          <defs>
+            <clipPath id="ticket-clip"><path d="M28 78 Q30 70 40 70 L246 68 Q256 68 256 78 L258 190 Q258 200 248 200 L38 202 Q28 202 28 192 Z"/></clipPath>
+          </defs>
+          <!-- 背景小手绘光晕 -->
+          <circle cx="140" cy="140" r="112" fill="#F7E7C6" opacity=".55"/>
+          <path d="M40 44c8-6 20-7 28-2M232 40c-8-5-18-4-24 2M22 224c6 7 16 10 24 8M246 226c-8 6-18 8-26 5" fill="none" stroke="#D99A2B" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- 票根 -->
+          <path d="M28 78 Q30 70 40 70 L246 68 Q256 68 256 78 L258 190 Q258 200 248 200 L38 202 Q28 202 28 192 Z" fill="#FFFDF7" stroke="#9E2F21" stroke-width="2.5" stroke-linejoin="round"/>
+          <g clip-path="url(#ticket-clip)">
+            <rect x="28" y="68" width="230" height="16" fill="#F6D9CE"/>
+            <path d="M28 192h230v16H28z" fill="#F5EAD8"/>
+            <path d="M0 0" />
+          </g>
+          <!-- 撕票虚线与齿孔 -->
+          <path d="M196 72 L196 198" fill="none" stroke="#B98C63" stroke-width="2" stroke-dasharray="5 6"/>
+          <circle cx="196" cy="68" r="6" fill="#FBF5E9" stroke="#B98C63" stroke-width="2"/>
+          <circle cx="196" cy="202" r="6" fill="#FBF5E9" stroke="#B98C63" stroke-width="2"/>
+          <!-- 票面文字 -->
+          <text x="46" y="110" font-size="15" fill="#9E2F21" font-family="幼圆,YouYuan,sans-serif" font-weight="bold">故乡站</text>
+          <path d="M108 105c14-2 26-2 40 0" fill="none" stroke="#C8412F" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="4 5"/>
+          <path d="M146 100l6 5-6 5" fill="none" stroke="#C8412F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="160" y="110" font-size="15" fill="#9E2F21" font-family="幼圆,YouYuan,sans-serif" font-weight="bold">家</text>
+          <text x="46" y="146" font-size="12" fill="#6E5849" font-family="幼圆,YouYuan,sans-serif">腊月 · 待定</text>
+          <text x="46" y="170" font-size="12" fill="#6E5849" font-family="幼圆,YouYuan,sans-serif">车次：归心号</text>
+          <path d="M44 182c18-3 36-1 52 0M104 182c14-2 30-1 44 1M158 181c10-1 18-1 26 0" fill="none" stroke="#B98C63" stroke-width="2" stroke-linecap="round"/>
+          <!-- 票号 -->
+          <text x="212" y="116" font-size="11" fill="#9E2F21" font-family="幼圆,YouYuan,sans-serif" transform="rotate(90 212 116)">NO.2026</text>
+          <!-- 福字印章 -->
+          <g transform="rotate(-12 226 158)">
+            <rect x="208" y="140" width="36" height="36" rx="8" fill="none" stroke="#C8412F" stroke-width="3"/>
+            <path d="M215 151h22M226 146v22M216 165h20M219 174h14" fill="none" stroke="#C8412F" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <!-- 小灯笼 -->
+          <g transform="translate(44 24)">
+            <path d="M18 0v14" stroke="#9E2F21" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M4 16q14-8 28 0" fill="#C8412F" stroke="#9E2F21" stroke-width="2.5"/>
+            <ellipse cx="18" cy="31" rx="17" ry="15" fill="#F6D9CE" stroke="#9E2F21" stroke-width="2.5"/>
+            <path d="M18 16v30M9 18c-3 8-3 18 0 26M27 18c3 8 3 18 0 26" fill="none" stroke="#C8412F" stroke-width="2"/>
+            <path d="M4 46q14 8 28 0" fill="#C8412F" stroke="#9E2F21" stroke-width="2.5"/>
+            <path d="M18 46v12M13 50v9M23 50v9" stroke="#D99A2B" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <!-- 行李箱 -->
+          <g transform="translate(190 196)">
+            <rect x="6" y="16" width="58" height="44" rx="9" fill="#2F6B58" stroke="#1F4A3D" stroke-width="2.5"/>
+            <path d="M22 16V9q0-5 5-5h16q5 0 5 5v7" fill="none" stroke="#1F4A3D" stroke-width="2.5"/>
+            <path d="M22 20v36M48 20v36" stroke="#DCEBE2" stroke-width="2" opacity=".8"/>
+            <circle cx="14" cy="64" r="5" fill="#9E2F21" stroke="#1F4A3D" stroke-width="2"/>
+            <circle cx="56" cy="64" r="5" fill="#9E2F21" stroke="#1F4A3D" stroke-width="2"/>
+            <path d="M28 32h14" stroke="#F7E7C6" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <!-- 烟花涂鸦 -->
+          <g stroke="#D99A2B" stroke-width="2.5" stroke-linecap="round" fill="none">
+            <path d="M246 96l0-10M246 116l0 10M236 106h-10M256 106h10M239 99l-7-7M253 113l7 7M253 99l7-7M239 113l-7 7"/>
+          </g>
+          <circle cx="246" cy="106" r="3" fill="#C8412F" stroke="none"/>
+          <!-- 小表情 -->
+          <g transform="translate(14 194)">
+            <circle cx="18" cy="18" r="15" fill="#F7E7C6" stroke="#B98C63" stroke-width="2"/>
+            <circle cx="13" cy="15" r="1.8" fill="#9E2F21"/><circle cx="23" cy="15" r="1.8" fill="#9E2F21"/>
+            <path d="M12 23q6 5 12 0" stroke="#9E2F21" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="rule-box">
+      <details>
+        <summary>这份小测怎么算分？（点开看完整规则）</summary>
+        <div class="rule-body">
+          <p>结果是<strong>由你的答案确定性算出</strong>的，不随机、不写死、也不看玄学。规则如下：</p>
+          <ol>
+            <li><strong>选项 → 分值</strong>：每道题的 4 个选项各带一组四维分数 <code>[归心 H, 牵绊 R, 仪式 C, 社交 S]</code>，每个分量 0–3 分；同时带一个<strong>档期偏移 d</strong>，取值为 +2 / +1 / −1 / −2（越想早回家越大）。</li>
+            <li><strong>维度计算</strong>：14 题逐项累加，每个维度满分 42 分；展示时归一化 <code>round(得分 ÷ 42 × 100)</code>。最高的那个维度叫「主导维度」，只用于结果解读，不改档位。</li>
+            <li><strong>档期分</strong>：<code>P = 所有已选选项的 d 之和</code>；<code>修正 = round((H − R) ÷ 7)</code>；<code>档期分 F = P + 修正</code>。想家多一点会往前挪，现实牵绊重一点会往后挪。</li>
+            <li><strong>结果判定阈值</strong>（按 F 从上往下第一个满足的区间）：<code>F ≥ 14</code> 小年前 · <code>F ≥ 6</code> 腊月廿七 · <code>F ≥ −2</code> 腊月廿九 · <code>F ≥ −9</code> 除夕当天 · <code>F ≥ −16</code> 正月错峰 · <code>F < −16</code> 原地过年。</li>
+          </ol>
+          <p>改任何一题的答案，都会按同一套公式重新计算并同步刷新结果页。</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="disclaimer" style="margin-top:var(--space-6)">
+      <span aria-hidden="true">✦</span>
+      <span>这是一份<strong>娱乐性自评</strong>，不是专业心理测评、量表或任何医疗建议，也不预测真实的车票与假期安排。仅供图一乐，别拿它跟老板请假。</span>
+    </div>
+  </section>
+
+  <!-- ===== 答题页 ===== -->
+  <section class="view" id="view-quiz" hidden aria-labelledby="quiz-title">
+    <h2 class="section-title" id="quiz-title">归家档期 · 答题中</h2>
+    <div class="quiz-top">
+      <div class="progress-head">
+        <span>已经走到第 <strong id="progress-current">1</strong> / <span id="progress-total">14</span> 站</span>
+        <span id="progress-count">已答 0 题</span>
+      </div>
+      <div class="progress" role="progressbar" aria-label="答题进度" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" id="progress-bar">
+        <div class="progress-rail" aria-hidden="true"></div>
+        <div class="progress-fill" aria-hidden="true"></div>
+        <svg class="progress-icon" viewBox="0 0 32 32" role="img" aria-label="前进中的小火车">
+          <title>前进中的小火车</title>
+          <rect x="4" y="10" width="20" height="14" rx="4" fill="#C8412F" stroke="#9E2F21" stroke-width="2"/>
+          <rect x="9" y="14" width="10" height="6" rx="2" fill="#FFFDF7"/>
+          <path d="M24 14h4l2 6v4h-6z" fill="#D99A2B" stroke="#9E2F21" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="10" cy="26" r="3" fill="#9E2F21"/><circle cx="22" cy="26" r="3" fill="#9E2F21"/>
+          <path d="M9 6c0-2 2-3 2-5M16 6c0-2 2-3 2-5" stroke="#B98C63" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="q-nav" id="q-nav" aria-label="跳到某一题"></div>
+    </div>
+
+    <div class="card card--ticket q-card">
+      <span class="q-index" id="q-index">第 01 站 · 出发前</span>
+      <h3 class="q-text" id="q-text">题目加载中…</h3>
+      <div class="options" id="options" role="group" aria-labelledby="q-text"></div>
+      <div class="quiz-actions">
+        <button class="btn btn--ghost btn--small" id="btn-prev" type="button">← 上一题</button>
+        <div class="hint" id="quiz-hint" role="status" aria-live="polite">选一个最像你的，再往下一站</div>
+        <button class="btn btn--primary btn--small" id="btn-next" type="button">下一站 →</button>
+      </div>
+    </div>
+
+    <div class="disclaimer" style="margin-top:var(--space-6)">
+      <span aria-hidden="true">✦</span>
+      <span>娱乐性自评，非专业心理诊断或医疗建议。答案只留在这台设备的页面里，刷新即清空，不上传、不收集。</span>
+    </div>
+  </section>
+
+  <!-- ===== 结果页 ===== -->
+  <section class="view" id="view-result" hidden aria-labelledby="result-title">
+    <div class="card card--ticket result-hero">
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+      <div class="sticker sticker--tilt" id="result-sticker">你的归家档期</div>
+      <div class="badge" id="result-badge"></div>
+      <h2 class="result-title" id="result-title">结果加载中…</h2>
+      <p class="result-date" id="result-date"></p>
+      <span class="score-pill" id="result-score"></span>
+    </div>
+
+    <div class="card result-block">
+      <h3 class="section-title">四个小维度</h3>
+      <div class="dim-grid" id="dim-grid"></div>
+      <p class="muted" style="margin-top:var(--space-4)">满分 100 为归一化后的相对强度，★ 标记的是你的主导维度。</p>
+    </div>
+
+    <div class="card result-block">
+      <h3 class="section-title">说说你这个档期</h3>
+      <p class="explain" id="result-explain"></p>
+    </div>
+
+    <div class="card result-block">
+      <h3 class="section-title">可以马上做的几件小事</h3>
+      <ul class="advice-list" id="result-advice"></ul>
+    </div>
+
+    <details class="derive">
+      <summary>这个结果是怎么算出来的？</summary>
+      <div class="derive-body" id="derive-body"></div>
+    </details>
+
+    <div class="result-actions">
+      <button class="btn btn--primary" id="btn-restart" type="button">重新测一遍</button>
+      <button class="btn btn--ghost" id="btn-edit" type="button">回去改答案</button>
+    </div>
+
+    <div class="disclaimer" style="margin-top:var(--space-6)">
+      <span aria-hidden="true">✦</span>
+      <span>娱乐性自评，非专业心理诊断或医疗建议；结果由答案确定性推导，仅作趣味参考，不构成出行、请假或家庭安排建议。</span>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  归期小票站 · 一张关于回家的手账<br>
+  纯本地页面，无登录、无支付、无数据上报、无个人信息收集
+</footer>
+
+<script>
+"use strict";
+/* =========================================================================
+   数据层：题目、选项分值、结果文案统一由此对象管理，改这里即可换题 / 换规则
+   v = [归心 H, 现实牵绊 R, 仪式感 C, 社交电量 S]，各 0–3 分
+   d = 档期偏移，+2 / +1 / -1 / -2
+   ========================================================================= */
+const QUIZ = {
+  dimensions: [
+    { key:"H", name:"归心指数", hint:"一想到家就坐不住的程度" },
+    { key:"R", name:"现实牵绊", hint:"工作、票务、预算的拉扯" },
+    { key:"C", name:"仪式感", hint:"对年俗与那顿饭的在意" },
+    { key:"S", name:"社交电量", hint:"走亲访友的续航能力" }
+  ],
+  stageNames:["出发前","订票时","年味里","收箱子","收尾周","人情局","念想","两班车","短假期","手信","腊月小事","临时状况","到家那刻","由你定义"],
+  questions: [
+    { text:"放假通知一贴出来，你第一件事是？", options:[
+      { label:"立刻去查车票，恨不得当天就走", v:[3,0,2,1], d:2 },
+      { label:"先把手头的事排完，再顺手订票", v:[2,2,1,1], d:1 },
+      { label:"等大家都在讨论时，再慢慢看一眼", v:[1,1,0,1], d:-1 },
+      { label:"哪天放、放几天，对我来说差别不大", v:[0,1,0,0], d:-2 }
+    ]},
+    { text:"抢票那天，你通常是？", options:[
+      { label:"提前设好三个提醒，准点守着", v:[3,0,2,0], d:2 },
+      { label:"设一个提醒，想起来就刷一下", v:[2,1,1,0], d:1 },
+      { label:"随缘看，抢不到就换个车次或日子", v:[1,1,0,1], d:-1 },
+      { label:"不急，等退票或者错峰那几天再说", v:[0,2,0,1], d:-2 }
+    ]},
+    { text:"说到「年夜饭」，你最在意的是？", options:[
+      { label:"那一顿得全家人齐齐整整坐一桌", v:[3,0,3,1], d:2 },
+      { label:"尽量赶上，实在不行就隔着屏幕碰个杯", v:[2,1,2,1], d:1 },
+      { label:"吃顿好的就行，哪天补上也都算", v:[1,0,1,0], d:-1 },
+      { label:"更想趁假期安静待着，简单吃点", v:[0,1,0,0], d:-2 }
+    ]},
+    { text:"行李箱一般是什么时候收的？", options:[
+      { label:"提前一周列好清单，一样样塞进去", v:[2,0,3,0], d:2 },
+      { label:"出发前一晚收拾妥当", v:[2,1,2,0], d:1 },
+      { label:"出门那天早上随手装几件", v:[1,1,1,1], d:-1 },
+      { label:"到了再买，或者干脆不带什么", v:[0,0,0,1], d:-2 }
+    ]},
+    { text:"假期前最后一周，你的节奏更像？", options:[
+      { label:"提前把活干完，专门腾出一整块时间", v:[2,1,2,0], d:2 },
+      { label:"按计划交接，不多也不少", v:[1,2,1,0], d:1 },
+      { label:"边收尾边看日历，跟着大家走", v:[1,2,0,1], d:-1 },
+      { label:"假期里也得随时在线，走不开", v:[0,3,0,0], d:-2 }
+    ]},
+    { text:"一想到亲戚聚会，你的电量是？", options:[
+      { label:"挺期待的，一年就这么一回", v:[3,0,3,3], d:2 },
+      { label:"挺好，见见人就当凑个热闹", v:[2,0,2,2], d:1 },
+      { label:"去一趟可以，别连着排好几天", v:[1,0,1,1], d:-1 },
+      { label:"更想把时间留给自家小范围", v:[0,0,0,0], d:-2 }
+    ]},
+    { text:"家乡的冬天，最先把你拉回去的是？", options:[
+      { label:"门口那盏灯，和那句「回来啦」", v:[3,0,2,1], d:2 },
+      { label:"只有家里才做得出的那道年菜", v:[3,0,3,1], d:1 },
+      { label:"老朋友一年一次的碰面", v:[2,0,1,2], d:-1 },
+      { label:"没有特别具体的，就是想放个假", v:[0,1,0,1], d:-2 }
+    ]},
+    { text:"如果只剩「除夕当天」和「正月初二」两班车？", options:[
+      { label:"除夕当天，年夜饭那桌不能少我", v:[3,1,3,1], d:2 },
+      { label:"除夕当天，能早走一小时是一小时", v:[2,1,2,1], d:1 },
+      { label:"再等等，看看有没有别的车次或安排", v:[0,3,0,1], d:-1 },
+      { label:"正月初二，人少票松更从容", v:[1,2,1,0], d:-2 }
+    ]},
+    { text:"假如假期只有短短五天？", options:[
+      { label:"也要回，少待几天没关系", v:[3,1,2,1], d:2 },
+      { label:"回，但把行程压得紧凑一点", v:[2,2,1,1], d:1 },
+      { label:"来回太赶，宁可换个时间再回", v:[1,3,0,0], d:-2 },
+      { label:"先看票价和安排，再定回不回", v:[0,3,0,1], d:-1 }
+    ]},
+    { text:"「给家里带点什么」这件事，你是？", options:[
+      { label:"早早列好单子，一样都不能漏", v:[2,0,3,1], d:2 },
+      { label:"出发前顺手买点当地特产", v:[1,1,2,1], d:1 },
+      { label:"到家再买，或发个红包代替", v:[0,1,1,0], d:-1 },
+      { label:"人不空手就行，随缘", v:[0,0,0,1], d:-2 }
+    ]},
+    { text:"腊月里，你最想先做的一件小事是？", options:[
+      { label:"贴春联、扫尘，越早越有年味", v:[2,0,3,1], d:2 },
+      { label:"陪家人备年货，逛一趟集市", v:[2,0,3,2], d:1 },
+      { label:"睡到自然醒，先把觉补回来", v:[0,1,0,0], d:-1 },
+      { label:"趁人少出去走走，安排自己的事", v:[0,1,0,0], d:-2 }
+    ]},
+    { text:"假期里被临时叫去处理一件急事？", options:[
+      { label:"提前全交接掉，尽量别让它发生", v:[1,2,1,0], d:2 },
+      { label:"处理完就放下，不耽误原定行程", v:[2,1,1,1], d:1 },
+      { label:"节奏被打乱，索性把行程往后挪", v:[1,3,0,0], d:-1 },
+      { label:"已经习惯了，随时在线", v:[0,3,0,0], d:-2 }
+    ]},
+    { text:"你更偏爱哪一种「到家时刻」？", options:[
+      { label:"天没亮就到，家里还静悄悄的", v:[3,0,2,0], d:2 },
+      { label:"下午到，正好赶上一起做饭", v:[3,0,3,2], d:1 },
+      { label:"晚上到，人齐了直接开饭", v:[2,0,2,2], d:-1 },
+      { label:"哪天到都好，先歇一晚再说", v:[0,1,0,0], d:-2 }
+    ]},
+    { text:"如果今年由你来定「哪天算过年」？", options:[
+      { label:"从小年那天就开始算", v:[3,0,3,1], d:2 },
+      { label:"从踏进家门那一刻算", v:[3,0,2,1], d:1 },
+      { label:"从年夜饭上桌那一刻算", v:[2,0,3,1], d:-1 },
+      { label:"哪天团圆哪天算，日子不固定", v:[1,1,1,1], d:-2 }
+    ]}
+  ],
+  /* 阈值按 min 降序，取第一个 F >= min 的档位 */
+  bands: [
+    { min:14, key:"xiaonian", tag:"抢跑型", title:"小年就到家", date:"建议档期：腊月廿三 · 小年前后", sticker:"贴纸：小年守灶人",
+      explain:"你的归心几乎压过了所有现实牵绊，年味对你来说不是某一天，而是一整段要亲手参与的过程。别人还在等放假通知，你已经在心里把春联贴好了。早回去这几天，对你不是「多待」，是「把年过完整」。",
+      advice:["把返程票和小年那天的到家时间一起定下来，别让好事卡在最后一步。","提前跟家里说一声具体车次，让他们别为了等你多备一轮菜。","列一张「回去想做的小事」清单：扫尘、贴联、赶一趟集，比刷手机划算。","给出发前的工作留半天交接缓冲，早走也走得踏实。"] },
+    { min:6, key:"tianpi", tag:"提前批", title:"腊月廿七 · 稳稳提前", date:"建议档期：腊月廿七前后", sticker:"贴纸：提前批乘客",
+      explain:"你既想早点回去，也愿意把手上的事安排妥当。对你来说，回家不是冲刺，是一场有节奏的推进：活收完、票订好、箱子收好，然后安安心心坐上那班车。这份稳妥，反而让你到家那天最有松弛感。",
+      advice:["把「最晚哪天必须交完」写进日历，倒推订票日，别让小事滚到最后。","提前两三天把行李收一半，出发前一晚只补零碎。","和家里约一顿不算正式的家常饭，比挤在年夜饭那天更聊得开。","给来回路上留一段空白时间，别把假期排成另一张工作表。"] },
+    { min:-2, key:"caidian", tag:"踩点派", title:"腊月廿九 · 不早不晚", date:"建议档期：腊月廿九前后", sticker:"贴纸：踩点小能手",
+      explain:"你不追最前，也不拖到最后，习惯在「差不多刚好」的位置落脚。想家是真的，手头的事也是真的，你擅长在两者之间找一个谁都不亏欠的点。这种节奏最经得起突发状况，也最容易被一句「要不你早点回」打动。",
+      advice:["把车票、交接、行李三件事各留一个备选方案，踩点才不会变成赶点。","主动告诉家里大概哪天到，省得双方都在猜。","留一天专门陪家人备年货，比多待两天却各刷各的手机更值。","如果临时被事情绊住，别硬扛，提前改签比当天手忙脚乱舒服。"] },
+    { min:-9, key:"kadian", tag:"卡点侠", title:"除夕当天 · 极限冲刺", date:"建议档期：除夕当天", sticker:"贴纸：卡点侠",
+      explain:"你把能挤的时间都留给了别的事，最后踩着年夜饭的点进门。多半不是不想家，而是工作、票务或节奏把你推到了这一天。好处是效率拉满，代价是路上任何一点延误都会被放大——你比谁都需要一张准点的票。",
+      advice:["优先选白天到达的车次，给晚上的饭留足缓冲。","把行李压缩到随身能拎走，减少中转和托运的变数。","提前跟家里约定「我可能晚一点，先别等我开饭」，双方都轻松。","到家先坐十分钟再进厨房，别把自己直接切进忙碌模式。"] },
+    { min:-16, key:"cuofeng", tag:"错峰派", title:"正月里 · 慢慢回", date:"建议档期：正月初二及以后 · 错峰", sticker:"贴纸：错峰慢归人",
+      explain:"你不太被「必须哪天」绑住，更在意这一趟回得从从容容。人少、票松、不用挤，团圆也不必挤在某一个晚上。对你来说，年是一段可以往后挪的日子，重点是人到、心到，不是日历上那个数字。",
+      advice:["提前跟家里说清错峰的打算，把「晚回」讲成「多陪几天」，误会会少很多。","把年夜饭换成一次视频碰杯或一通长电话，仪式感不一定要同一个屋檐。","挑一趟不拥挤的车次，带本一直没看的书上路。","回家后单独留出一天，只陪最想陪的人，不排任何应酬。"] },
+    { min:-Infinity, key:"yundi", tag:"云团圆", title:"原地过年 · 云团圆", date:"建议档期：今年就地过年 / 择日再聚", sticker:"贴纸：云团圆观察员",
+      explain:"现实牵绊明显更重一些，或者你本来就更想把这个假期留给自己。不回去不等于不想家，只是今年这趟车不太合适。把团圆拆成一通电话、一次寄回家的年货、一个约好的日子，一样能把心意送到。",
+      advice:["给家里寄一份小而具体的年货，比一句「今年不回了」更暖。","约一个固定的视频时间，当成一件正事写进日程，别等「有空再说」。","给自己安排一顿认真做的饭，独处的年也需要一点仪式。","把「下次什么时候回」说成一个具体月份，别停在模糊的「改天」。"] }
+  ]
+};
+
+/* =========================================================================
+   纯函数：结果只由 answers 数组推导，不依赖任何外部状态
+   ========================================================================= */
+function computeResult(answers){
+  const raw = { H:0, R:0, C:0, S:0 };
+  let P = 0, answered = 0;
+  answers.forEach((pick, i) => {
+    if (pick === null || pick === undefined) return;
+    const opt = QUIZ.questions[i].options[pick];
+    if (!opt) return;
+    raw.H += opt.v[0]; raw.R += opt.v[1]; raw.C += opt.v[2]; raw.S += opt.v[3];
+    P += opt.d;
+    answered++;
+  });
+  const adjust = Math.round((raw.H - raw.R) / 7);
+  const F = P + adjust;
+  const norm = {};
+  QUIZ.dimensions.forEach(d => { norm[d.key] = Math.round(raw[d.key] / (QUIZ.questions.length * 3) * 100); });
+  let dominant = QUIZ.dimensions[0].key;
+  QUIZ.dimensions.forEach(d => { if (norm[d.key] > norm[dominant]) dominant = d.key; });
+  const band = QUIZ.bands.find(b => F >= b.min) || QUIZ.bands[QUIZ.bands.length - 1];
+  return { raw, norm, P, adjust, F, dominant, band, answered };
+}
+
+/* =========================================================================
+   状态机：intro / quiz / result
+   ========================================================================= */
+const state = { phase:"intro", index:0, answers:new Array(QUIZ.questions.length).fill(null) };
+const $ = id => document.getElementById(id);
+const views = { intro:$("view-intro"), quiz:$("view-quiz"), result:$("view-result") };
+
+function setPhase(phase){
+  state.phase = phase;
+  Object.keys(views).forEach(k => { views[k].hidden = (k !== phase); });
+  window.scrollTo({ top:0, behavior:"auto" });
+  const focusTarget = phase === "intro" ? $("btn-start") : phase === "quiz" ? $("q-text") : $("result-title");
+  if (focusTarget){
+    if (phase !== "intro") focusTarget.tabIndex = -1;
+    focusTarget.focus({ preventScroll:true });
+  }
+}
+
+/* ---------- 答题页渲染 ---------- */
+function renderNav(){
+  const nav = $("q-nav");
+  nav.innerHTML = "";
+  QUIZ.questions.forEach((q, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "q-nav-btn";
+    b.textContent = String(i + 1);
+    b.setAttribute("aria-label", "跳到第 " + (i + 1) + " 题" + (state.answers[i] !== null ? "，已答" : "，未答"));
+    if (state.answers[i] !== null) b.classList.add("is-answered");
+    if (i === state.index) { b.classList.add("is-current"); b.setAttribute("aria-current","step"); }
+    b.addEventListener("click", () => { state.index = i; renderQuestion(); });
+    nav.appendChild(b);
+  });
+}
+
+function renderQuestion(){
+  const q = QUIZ.questions[state.index];
+  const n = QUIZ.questions.length;
+  $("q-index").textContent = "第 " + String(state.index + 1).padStart(2,"0") + " 站 · " + (QUIZ.stageNames[state.index] || "路上");
+  $("q-text").textContent = q.text;
+  $("q-text").tabIndex = -1;
+  $("progress-current").textContent = String(state.index + 1);
+  $("progress-total").textContent = String(n);
+  const answered = state.answers.filter(a => a !== null).length;
+  $("progress-count").textContent = "已答 " + answered + " 题";
+  const bar = $("progress-bar");
+  const pct = (answered / n * 100).toFixed(1) + "%";
+  bar.style.setProperty("--p", pct);
+  bar.setAttribute("aria-valuenow", String(answered));
+  bar.setAttribute("aria-valuetext", "已完成 " + answered + " / " + n + " 题");
+
+  const box = $("options");
+  box.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option";
+    btn.setAttribute("aria-pressed", state.answers[state.index] === i ? "true" : "false");
+    const dot = document.createElement("span"); dot.className = "option-dot"; dot.setAttribute("aria-hidden","true");
+    const key = document.createElement("span"); key.className = "option-key"; key.textContent = "ABCD"[i];
+    const label = document.createElement("span"); label.className = "option-label"; label.textContent = opt.label;
+    btn.append(dot, key, label);
+    btn.addEventListener("click", () => {
+      state.answers[state.index] = i;
+      renderQuestion();
+      clearHint();
+    });
+    box.appendChild(btn);
+  });
+
+  $("btn-prev").disabled = state.index === 0;
+  $("btn-next").textContent = state.index === n - 1 ? "看结果 →" : "下一站 →";
+  renderNav();
+}
+
+function clearHint(){
+  const hint = $("quiz-hint");
+  hint.classList.remove("hint--warn");
+  hint.textContent = "选一个最像你的，再往下一站";
+}
+
+function warnHint(){
+  const hint = $("quiz-hint");
+  /* 空状态插画：一个歪头的小表情。整段作为 HTML 写入，保证内联 SVG 命名空间正确 */
+  hint.innerHTML =
+    '<svg viewBox="0 0 28 28" role="img" aria-label="歪头的小表情"><title>歪头的小表情</title>' +
+    '<g transform="rotate(-8 14 14)">' +
+    '<circle cx="14" cy="14" r="11" fill="#F7E7C6" stroke="#B3372B" stroke-width="2"/>' +
+    '<circle cx="10" cy="12" r="1.6" fill="#B3372B"/><circle cx="18" cy="12" r="1.6" fill="#B3372B"/>' +
+    '<path d="M10 19q4-3 8 0" fill="none" stroke="#B3372B" stroke-width="2" stroke-linecap="round"/>' +
+    '</g></svg><span>这一站还没选呢，先挑一个吧</span>';
+  hint.classList.remove("hint--warn");
+  void hint.offsetWidth;
+  hint.classList.add("hint--warn");
+}
+
+/* ---------- 结果徽章（6 类各自独立的原创内联 SVG） ---------- */
+function badgeSVG(key){
+  const wrap = (inner, label) => '<svg viewBox="0 0 104 104" role="img" aria-label="' + label + '"><title>' + label + '</title>' +
+    '<circle cx="52" cy="52" r="47" fill="#F7E7C6" stroke="#9E2F21" stroke-width="2.5" stroke-dasharray="5 4"/>' +
+    '<circle cx="52" cy="52" r="39" fill="#FFFDF7" stroke="#E2CDB2" stroke-width="2"/>' + inner + '</svg>';
+  const S = 'stroke="#9E2F21" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+  switch(key){
+    case "xiaonian": return wrap(
+      '<path d="M52 24v9" '+S+'/><path d="M38 34q14-7 28 0" fill="#C8412F" stroke="#9E2F21" stroke-width="2.5"/>' +
+      '<ellipse cx="52" cy="52" rx="21" ry="18" fill="#F6D9CE" stroke="#9E2F21" stroke-width="2.5"/>' +
+      '<path d="M52 34v36M42 36c-4 10-4 22 0 32M62 36c4 10 4 22 0 32" fill="none" stroke="#C8412F" stroke-width="2"/>' +
+      '<path d="M38 70q14 7 28 0" fill="#C8412F" stroke="#9E2F21" stroke-width="2.5"/>' +
+      '<path d="M52 70v9M47 74v7M57 74v7" stroke="#D99A2B" stroke-width="2" stroke-linecap="round"/>' +
+      '<circle cx="45" cy="50" r="1.6" fill="#9E2F21"/><circle cx="59" cy="50" r="1.6" fill="#9E2F21"/><path d="M47 57q5 4 10 0" '+S+'/>',
+      "小年守灶人：一只笑眯眯的红灯笼");
+    case "tianpi": return wrap(
+      '<rect x="26" y="34" width="52" height="38" rx="5" fill="#FFFDF7" stroke="#9E2F21" stroke-width="2.5" transform="rotate(-5 52 53)"/>' +
+      '<path d="M68 36v34" fill="none" stroke="#B98C63" stroke-width="2" stroke-dasharray="4 5" transform="rotate(-5 52 53)"/>' +
+      '<path d="M33 46h27M33 55h20" stroke="#C8412F" stroke-width="2" stroke-linecap="round" transform="rotate(-5 52 53)"/>' +
+      '<circle cx="75" cy="61" r="9" fill="#F7E7C6" stroke="#D99A2B" stroke-width="2"/>' +
+      '<path d="M75 56v5l4 2" '+S+'/>' +
+      '<path d="M30 27l3 5M83 28l-3 5" stroke="#D99A2B" stroke-width="2" stroke-linecap="round"/>',
+      "提前批乘客：一张盖了章的车票与小怀表");
+    case "caidian": return wrap(
+      '<rect x="30" y="36" width="44" height="42" rx="9" fill="#2F6B58" stroke="#1F4A3D" stroke-width="2.5" transform="rotate(4 52 57)"/>' +
+      '<path d="M42 36V30q0-4 4-4h12q4 0 4 4v6" fill="none" stroke="#1F4A3D" stroke-width="2.5" transform="rotate(4 52 57)"/>' +
+      '<path d="M42 40v34M62 40v34" stroke="#DCEBE2" stroke-width="2" transform="rotate(4 52 57)"/>' +
+      '<circle cx="37" cy="80" r="4" fill="#C8412F"/><circle cx="67" cy="80" r="4" fill="#C8412F"/>' +
+      '<path d="M46 54q6 5 12 0" '+S+'/><circle cx="46" cy="48" r="1.6" fill="#FFFDF7"/><circle cx="58" cy="48" r="1.6" fill="#FFFDF7"/>',
+      "踩点小能手：一只笑着的绿行李箱");
+    case "kadian": return wrap(
+      '<circle cx="52" cy="54" r="24" fill="#F6D9CE" stroke="#9E2F21" stroke-width="2.5"/>' +
+      '<circle cx="52" cy="54" r="19" fill="#FFFDF7" stroke="#E2CDB2" stroke-width="2"/>' +
+      '<path d="M52 54V40M52 54l11 7" '+S+'/><circle cx="52" cy="54" r="2.5" fill="#C8412F"/>' +
+      '<path d="M52 30v5M52 73v5M28 54h5M71 54h5" stroke="#D99A2B" stroke-width="2" stroke-linecap="round"/>' +
+      '<path d="M30 32l4 4M74 32l-4 4" stroke="#C8412F" stroke-width="2" stroke-linecap="round"/>' +
+      '<path d="M44 66q8 5 16 0" '+S+'/>',
+      "卡点侠：快到点的闹钟");
+    case "cuofeng": return wrap(
+      '<path d="M62 30a20 20 0 1 0 12 30 17 17 0 0 1-12-30z" fill="#F7E7C6" stroke="#9E2F21" stroke-width="2.5"/>' +
+      '<path d="M30 62h44q-4 14-22 14t-22-14z" fill="#DCEBE2" stroke="#2F6B58" stroke-width="2.5"/>' +
+      '<path d="M36 70q16 6 32 0" fill="none" stroke="#2F6B58" stroke-width="2"/>' +
+      '<path d="M44 44c0-4 4-6 4-10M56 46c0-3 3-5 3-8" fill="none" stroke="#B98C63" stroke-width="2" stroke-linecap="round"/>' +
+      '<circle cx="36" cy="36" r="2" fill="#D99A2B"/><circle cx="76" cy="42" r="2" fill="#D99A2B"/>',
+      "错峰慢归人：月亮与一杯热茶");
+    default: return wrap(
+      '<rect x="26" y="34" width="52" height="38" rx="6" fill="#FFFDF7" stroke="#9E2F21" stroke-width="2.5"/>' +
+      '<path d="M26 34l26 16 26-16" fill="none" stroke="#C8412F" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<circle cx="52" cy="54" r="9" fill="#F6D9CE" stroke="#9E2F21" stroke-width="2"/>' +
+      '<path d="M48 54h8M52 50v8" '+S+'/><circle cx="46" cy="50" r="1.5" fill="#9E2F21"/><circle cx="58" cy="50" r="1.5" fill="#9E2F21"/>' +
+      '<path d="M33 78h38M38 84h28" stroke="#D99A2B" stroke-width="2" stroke-linecap="round"/>',
+      "云团圆观察员：一封带着笑脸的信");
+  }
+}
+
+/* ---------- 结果页渲染 ---------- */
+function renderConfetti(){
+  const box = $("confetti");
+  box.innerHTML = "";
+  const colors = ["#C8412F","#D99A2B","#2F6B58","#E2CDB2"];
+  for (let i = 0; i < 14; i++){
+    const s = document.createElement("span");
+    s.style.left = (6 + i * 6.6) + "%";
+    s.style.top = (4 + (i % 4) * 7) + "%";
+    s.style.background = colors[i % colors.length];
+    s.style.borderRadius = i % 3 === 0 ? "50%" : "2px";
+    s.style.animationDelay = (i * 40) + "ms";
+    box.appendChild(s);
+  }
+}
+
+function renderResult(){
+  const r = computeResult(state.answers);
+  const b = r.band;
+  $("result-sticker").textContent = b.sticker + " · " + b.tag;
+  $("result-badge").innerHTML = badgeSVG(b.key);
+  $("result-badge").setAttribute("role","img");
+  $("result-badge").setAttribute("aria-label", b.title + " 徽章插画");
+  $("result-title").textContent = b.title;
+  $("result-date").textContent = b.date;
+  $("result-score").textContent = "档期分 F = " + r.F + " · 主导维度：" + QUIZ.dimensions.find(d => d.key === r.dominant).name;
+
+  const grid = $("dim-grid");
+  grid.innerHTML = "";
+  QUIZ.dimensions.forEach(d => {
+    const row = document.createElement("div");
+    row.className = "dim-row" + (d.key === r.dominant ? " is-dominant" : "");
+    const head = document.createElement("div"); head.className = "dim-head";
+    const name = document.createElement("span"); name.textContent = d.name + " · " + d.hint;
+    const val = document.createElement("span"); val.className = "dim-value"; val.textContent = String(r.norm[d.key]);
+    head.append(name, val);
+    const track = document.createElement("div"); track.className = "dim-track";
+    const fill = document.createElement("div"); fill.className = "dim-fill"; fill.style.width = r.norm[d.key] + "%";
+    track.appendChild(fill);
+    row.append(head, track);
+    grid.appendChild(row);
+  });
+
+  const dimName = QUIZ.dimensions.find(d => d.key === r.dominant).name;
+  $("result-explain").innerHTML = "";
+  const p1 = document.createElement("span");
+  p1.textContent = b.explain;
+  const p2 = document.createElement("span");
+  p2.innerHTML = " 这次最突出的是<strong>" + dimName + "</strong>（" + r.norm[r.dominant] + " 分），" +
+    "而<strong>归心 " + r.norm.H + "</strong>、<strong>牵绊 " + r.norm.R + "</strong> 的此消彼长，把你的档期分推到了 <strong>" + r.F + "</strong>，落在「" + b.title + "」这一档。";
+  $("result-explain").append(p1, p2);
+
+  const ul = $("result-advice");
+  ul.innerHTML = "";
+  b.advice.forEach(text => {
+    const li = document.createElement("li"); li.className = "advice-item"; li.textContent = text; ul.appendChild(li);
+  });
+
+  const rows = QUIZ.bands.slice().reverse().map(item => {
+    const lo = item.min === -Infinity ? "F < −16" : "F ≥ " + item.min;
+    const hit = item.key === b.key ? ' class="is-hit"' : "";
+    return "<tr" + hit + "><td>" + lo + "</td><td>" + item.title + "</td></tr>";
+  }).join("");
+  $("derive-body").innerHTML =
+    "<p>你答了 <strong>" + r.answered + " / " + QUIZ.questions.length + "</strong> 题。每个选项给四个维度各 0–3 分，并带档期偏移 d（+2 / +1 / −1 / −2）。</p>" +
+    "<p>① 四维原始分：<code>H=" + r.raw.H + "，R=" + r.raw.R + "，C=" + r.raw.C + "，S=" + r.raw.S + "</code>（各维满分 " + (QUIZ.questions.length * 3) + "，展示时归一化到 100）。<br>" +
+    "② 偏移之和 <code>P = " + r.P + "</code>；修正 <code>round((H − R) ÷ 7) = " + r.adjust + "</code>。<br>" +
+    "③ 档期分 <code>F = P + 修正 = " + r.F + "</code>，按下面阈值从上往下取第一个满足的区间，得到「" + b.title + "」。</p>" +
+    "<table class=\"derive-table\"><thead><tr><th>判定阈值</th><th>归家档期</th></tr></thead><tbody>" + rows + "</tbody></table>" +
+    "<p>主导维度（本次为" + dimName + "）只影响解读文字，不改变档位。回去改任何一题，以上数值都会重新计算并同步刷新。</p>";
+
+  renderConfetti();
+  setPhase("result");
+}
+
+/* =========================================================================
+   事件绑定
+   ========================================================================= */
+$("btn-start").addEventListener("click", () => { state.index = 0; clearHint(); renderQuestion(); setPhase("quiz"); });
+$("btn-prev").addEventListener("click", () => { if (state.index > 0){ state.index--; clearHint(); renderQuestion(); } });
+$("btn-next").addEventListener("click", () => {
+  if (state.answers[state.index] === null){ warnHint(); return; }
+  const unansweredAt = state.answers.findIndex(a => a === null);
+  if (state.index < QUIZ.questions.length - 1){ state.index++; clearHint(); renderQuestion(); return; }
+  if (unansweredAt !== -1){ state.index = unansweredAt; renderQuestion(); warnHint(); return; }
+  renderResult();
+});
+$("btn-restart").addEventListener("click", () => {
+  state.answers = new Array(QUIZ.questions.length).fill(null);
+  state.index = 0; clearHint(); setPhase("intro");
+});
+$("btn-edit").addEventListener("click", () => {
+  state.index = 0; clearHint(); renderQuestion(); setPhase("quiz");
+});
+document.addEventListener("keydown", e => {
+  if (state.phase !== "quiz") return;
+  if (e.key === "ArrowLeft" && state.index > 0){ state.index--; clearHint(); renderQuestion(); }
+  if (e.key === "ArrowRight" && state.index < QUIZ.questions.length - 1){ state.index++; clearHint(); renderQuestion(); }
+  const k = e.key.toUpperCase();
+  if ("ABCD".includes(k) && k.length === 1){
+    const i = "ABCD".indexOf(k);
+    if (i < QUIZ.questions[state.index].options.length){
+      state.answers[state.index] = i; renderQuestion(); clearHint();
+    }
+  }
+});
+/* 首屏：确保三个视图状态正确 */
+setPhase("intro");
+</script>
+</body>
+</html>
